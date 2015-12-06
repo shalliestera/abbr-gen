@@ -1,0 +1,26 @@
+body {
+	font:14px/1.2em sans-serif,'宋体';
+	width:80%;
+}
+
+.table {
+	width:800px;
+	border:thin solid black;
+}
+
+.tableRow {
+	display:table-row;
+}
+
+.tableRow > div {
+	display:table-cell;
+}
+
+.verticalHeader {
+	text-align:right;
+}
+
+.bigButton {
+	width:100%;
+	height:50px;
+}

@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Font Abbr Generator</title>
+    <link rel="stylesheet" href="font-gen.css">
+  </head>
+  <body>
+    <h1>自动生成.css文件中的字体代码</h1>
+    <pre>
+font-style | font-variant | font-weight | font-Size | line-height | font-family
+</pre>
+<h2>填写以下字段</h2>
+<div class="table">
+    <!-- 字体样式|font-style -->
+    <div class="tableRow">
+      <div class="verticalHeader">
+        <label for="txtFontStyle">font-style:</label>
+      </div>
+      <div>
+        <input type="text" name="txtFontStyle" id="txtFontStyle" value="normal" placeholder="normal">
+      </div>
+      <div>
+        <input type="button" value="normal" onclick="FillFontStyle(this.value)">
+          <input type="button" value="italic" onclick="FillFontStyle(this.value)">
+          <input type="button" value="oblique" onclick="FillFontStyle(this.value)">
+      </div>
+	  <div>123</div>
+    </div>
+    <!-- 字体变化|font-variant -->
+    <div class="tableRow">
+      <div class="verticalHeader">
+        <label for="txtFontVariant">font-variant:</label> 
+      </div>
+      <div>
+        <input type="text" name="txtFontVariant" id="txtFontVariant" value="normal" placeholder="normal">
+      </div>
+      <div>
+        <input type="button" value="normal" onclick="FillFontVariant(this.value)"> 
+        <input type="button" value="small-caps" onclick="FillFontVariant(this.value)"> 
+        <input type="button" value="inherit" onclick="FillFontVariant(this.value)">
+      </div>
+	  <div>456
+	  </div>
+    </div>
+    <!-- 字重|font-weight|checkbox + text -->
+    <div class="tableRow">
+    <div class="verticalHeader">
+        <label for="txtFontWeight">font-weight:</label>
+    </div>
+    <div>
+        <input type="text" name="txtFontWeight" placeholder="normal/bold/bolder/lighter" id="txtFontWeight" value="normal">
+    </div>
+    <div>
+      <input type="button" value="normal" onclick="FillFontWeight(this.value)">
+      <input type="button" value="bold" onclick="FillFontWeight(this.value)">
+      <input type="button" value="bolder" onclick="FillFontWeight(this.value)">
+      <input type="button" value="lighter" onclick="FillFontWeight(this.value)">
+      <input type="button" value="inherit" onclick="FillFontWeight(this.value)">
+    </div>
+	<div>789</div>
+  </div>
+  <!--
+    <blockquote>normal/bold/bolder/lighter
+    <br>100/200/300/400(normal)/500/600/700(bold)/800/900
+    <br>inherit</blockquote>
+  -->
+    <!-- 行高|line-height|checkbox + text -->
+    <div class="tableRow">
+      <div class="verticalHeader">
+        <label for="cbLineHeight">line-height:</label>
+      </div>
+      <div>
+        <input type="checkbox" name="cbLineHeight" id="cbLineHeight" checked>
+        <input type="text" value="normal" id="txtLineHeight">
+      </div>
+      <div>
+        <input type="button" value="normal" onclick="FillLineHeight(this.value)">
+        <input type="button" value="120%" onclick="FillLineHeight(this.value)">
+        <input type="button" value="16px" onclick="FillLineHeight(this.value)">
+        <input type="button" value="1.2em" onclick="FillLineHeight(this.value)">
+        <input type="button" value="inherit" onclick="FillLineHeight(this.value)">
+      </div>
+	  <div>123
+	  </div>
+    </div>
+  <!--
+  <blockquote>normal/110%/14px/1.2/inherit</blockquote>
+  -->
+    <!-- 字体尺寸|iFontSize checkbox + text -->
+    <div class="tableRow">
+    <div class="verticalHeader">
+    <label for="cbFontSize">font-size:</label>
+    </div>
+    <div>
+    <input type="checkbox" name="cbFontSize" id="cbFontSize"> 
+    <input type="text" id="txtFontSize" placeholder="14px/110%">
+    </div>
+    <div>
+    <input type="button" value="small" onclick="FillFontSize(this.value)">
+    <input type="button" value="medium" onclick="FillFontSize(this.value)">
+    <input type="button" value="large" onclick="FillFontSize(this.value)">
+    <input type="button" value="14px" onclick="FillFontSize(this.value)">
+    <input type="button" value="120%" onclick="FillFontSize(this.value)">
+    <input type="button" value="inherit" onclick="FillFontSize(this.value)">
+    </div>
+	<div>234</div>
+  </div>
+  <!--
+  <blockquote>xx-small,x-small,small,medium,large,x-large,xx-large
+    <br>smaller/large
+    <br>14px/120%
+    <br>inherit</blockquote>
+    -->
+    <!-- 字体族|fFamilyVal|checkbox + text -->
+    <div class="tableRow">
+    <div class="verticalHeader">
+        <label for="cbFontFamily">font-family:</label> </div>
+    <div>
+        <input type="checkbox" name="cbFontFamily" id="cbFontFamily" checked="checked"> 
+        <input type="text" id="txtFontFamily" placeholder="sans-serif,'宋体'">
+    </div>
+    <div>
+      <input type="button" value="CLEAR" onclick="FillFontFamily(this.value)">
+      <input type="button" value="sans-serif,'宋体'" onclick="FillFontFamily(this.value)">
+    </div>
+	<div>常用字体
+	</div>
+  </div>
+  
+</div>
+<h2>鼠标点击或移动到下面按钮上</h2>
+    <!-- 按钮|button -->
+  <div>
+      <input type="button" value="生成代码" onclick="GenerateCode()" onmouseover="GenerateCode()" class="bigButton">
+    </div>
+  <div class="table">
+  <div class="tableRow">
+    <!-- 缩写 生成区|abbrArea -->
+    <div>
+          <h3>缩写生成</h3>
+          <textarea id="iAbbr" rows=10 cols=20></textarea>
+    </div>
+    <!-- 全代码 生成区 -->
+    <div>
+      <h3>不缩写</h3>
+      <textarea id="iFullCode" rows="10" cols="20"></textarea>
+    </div>
+    <!-- 效果预览|sample -->
+    <div>
+      <h3>效果预览</h3>
+      <textarea class="sample">sample</textarea>
+    </div>
+  </div>
+  </div>
+    <!-- js -->
+    <script src="font-gen.js"></script>
+  </body>
+</html>
