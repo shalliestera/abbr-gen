@@ -3,7 +3,7 @@ var g_Font = {
 	"style" : "normal", //"italic","oblique"
 	"variant" : "normal", //"small-caps","inherit"
 	"weight" : "normal", //"bold"
-	"size" : "14",
+	"size" : "",
 	"lineheight" : "",
 	"family" : ""
 }
@@ -11,6 +11,7 @@ var g_Font = {
 function GenerateCode() {
 	var oCode = document.getElementById("iFullCode");
 	var oAbbr = document.getElementById("iAbbr");
+	var tAbbr = document.getElementById("txtAbbr");
 	SetFontStyle();
 	SetFontVariant();
 	SetFontWeight();
@@ -19,6 +20,8 @@ function GenerateCode() {
 	SetFontFamily();
 	oCode.value = GenCode();
 	oAbbr.value = GenAbbr();
+	tAbbr.value = GenAbbr();
+	SetSampleStyle();
 }
 
 var cbfsize = document.getElementById("cbFontSize");
@@ -27,8 +30,8 @@ var cblineh = document.getElementById("cbLineHeight");
 
 //生成代码缩写（满族条件时）
 function GenAbbr() {
-	var abbr = ".font {\n  font:";
-	var abbrDef = ".font {\n  font:";
+	var abbrHead = ".font {\n  font:";
+	var abbr = "";
 	// line-height 和 font-size 和 font-family 前面的复选框都勾选了，
 	// 并且 都不为空
 	if ((cbfsize.checked && cbffami.checked && cblineh.checked) && (g_Font.size != "" && (g_Font.lineheight != "" && g_Font.lineheight != "normal") && g_Font.family != "")) {
@@ -39,7 +42,7 @@ function GenAbbr() {
 		// 排除 font-variant 的默认值
 		if (g_Font.variant != "normal") {
 			// 是否先加空格
-			if(abbr != abbrDef){
+			if(abbr != ""){
 			  abbr += " "
 			}
 			abbr += g_Font.variant;
@@ -47,29 +50,30 @@ function GenAbbr() {
 		// 排除 font-weight 的默认值
 		if (g_Font.weight != "normal") {
 			// 是否先加空格
-			if(abbr != abbrDef){
+			if(abbr != ""){
 			  abbr += " "
 			}
 			abbr += g_Font.weight;
 		}
 		// font-size / line-height font-family
 		// 是否先加空格
-		if(abbr != abbrDef){
+		if(abbr != ""){
 			abbr += " "
 		}
 		abbr += g_Font.size + "/" + g_Font.lineheight + " " + g_Font.family;
 		// 如果有增加新内容（不是初始值）
-		if(abbr != abbrDef){
-		  return abbr + ";\n}";
+		if(abbr != ""){
+		  return abbrHead + abbr + ";\n}";
 		}
-		else return abbr + "\n}";
+		else return abbrHead + abbr + "\n}";
 	} else
 		return GenCode();
 }
 
 // 生成完全体代码
 function GenCode() {
-	var full = ".font {\n";
+	var fHead = ".font {\n";
+	var full = "";
 	// font-style
 	if(g_Font.style != "normal") {
 		full += "  font-style:" + g_Font.style + ";\n";
@@ -94,7 +98,7 @@ function GenCode() {
 	if (g_Font.family != "") {
 		full += "  font-family:" + g_Font.family + ";\n";
 	}
-	return full + "}";
+	return fHead + full + "\n}";
 }
 
 /* 设置font-style的笨办法 */
@@ -176,4 +180,15 @@ function SetFontFamily() {
 	if (cbffami.checked) {
 		g_Font.family = fontfamily.value;
 	}
+}
+
+/* 修改sample区 */
+function SetSampleStyle() {
+  var ssst = document.getElementById("sample");
+  ssst.style.FontStyle=g_Font.style;
+  ssst.style.FontVariant=g_Font.variant;
+  ssst.style.FontWeight=g_Font.weight;
+  ssst.style.FontSize=g_Font.size;
+  ssst.style.LineHeight=g_Font.lineheight;
+  ssst.style.FontFamily=g_Font.family;
 }

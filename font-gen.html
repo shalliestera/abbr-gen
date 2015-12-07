@@ -139,19 +139,28 @@ font-style | font-variant | font-weight | font-Size | line-height | font-family
     <!-- 缩写 生成区|abbrArea -->
     <div>
           <h3>缩写生成</h3>
-          <textarea id="iAbbr" rows=10 cols=20></textarea>
+          <textarea id="iAbbr"></textarea>
     </div>
     <!-- 全代码 生成区 -->
     <div>
       <h3>不缩写</h3>
-      <textarea id="iFullCode" rows="10" cols="20"></textarea>
+      <textarea id="iFullCode"></textarea>
     </div>
     <!-- 效果预览|sample -->
     <div>
       <h3>效果预览</h3>
-      <textarea class="sample">sample</textarea>
+      <textarea id="sample">sample
+这里显示样式，虽然没完成。Sample here. Under construction.
+这里显示样式，虽然没完成。Sample here. Under construction.
+	  </textarea>
     </div>
   </div>
+  <div id="oneline">
+  <div>
+		<h3>一行</h3>
+		<input type="text" id="txtAbbr">
+	</div>
+	</div>
   </div>
     <!-- js -->
     <script src="font-gen.js"></script>
